@@ -6,4 +6,4 @@ server.get('/', (req: Request, res: Response) => {
     res.json('teste');
 })
 
-server.listen(3000)
+server.listen(3000);
