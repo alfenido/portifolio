@@ -1,0 +1,192 @@
+TypeScript
+==================================================================================
+
+Instalando 
+..................................................................................
+npm install -g typescript
+
+
+Versao
+..................................................................................
+tsc --version
+
+
+convertendo arquivos ts em js
+.................................................................................
+tsc NomeDoArquivo
+ex: tsc script.ts (ele converte e cria o arquivo script.js)
+ele cria na mesma pasta se quero em pasta diferente exemplo abaixo:
+
+tsc src/script.ts --outDir public
+assim ele converte o arq ts da pasta src dentro da pasta public
+
+para não criar o js em caso de erro
+ex: tsc script.ts --noEmitOnError
+
+
+definindo tipos de variáveis:
+.................................................................................
+let idade: number = 90;
+em função: String
+function(nome: string): string (recebe um parametro string e o retorno é string
+
+em função: Objeto
+function(nome: string): string (recebe um parametro string e o retorno é string
+function(usuario: {nome:string, idade?:number} (recebe objeto{} e a propriedade idade é opcional
+
+
+Union Types - múltiplos tipos
+.................................................................................
+let idade: string | number = 90;
+function mostrarIdade( idade: string | number){
+    if(typeof idade === 'string'){
+        faça algo
+    }else{ 
+        faça outro algo
+    }
+}
+
+
+Type e Interface ( 
+.................................................................................
+Type e Interface
+
+type NomeCompleto = string;
+let nome: NomeCompleto = "Helder"
+
+type VerdadeiroFalso = true | false;
+let minhaVar: VerdadeiroFalso = 10; Neste caso da erro pois só pode true ou false
+
+melhor uso em objetos:
+
+type User = {
+    nome: string,
+    idade?: number
+} 
+.... ou .... em interface voce pode declarar novas propriedades a qualquer hora no type não
+interface User{
+    nome: string
+}
+interface User{
+    idade: number
+}
+function resumo(usuario: User){}
+
+
+
+Type Assertions
+.................................................................................
+let idadeField = document.getElementById('idade') as HTMLInputElement
+console.log(idadeField.value)
+
+Nesse caso o TS não dá erro pois somente o elemento input tem a propriedade value
+caso esteja usando outro elemento dá um erro no TS.
+
+
+
+Type literais
+.................................................................................
+function mostrarTexto(
+    texto: string,
+    alinhamento: 'left' | 'right' | 'center'
+    ){
+        return '<div style="text-align:${alinhamento}">${texto}</div>';
+    }
+mostrarTexto("fkfjadfjaskfjasdlk",'outrotipo')
+aqui o alinhamento só recebe estes tipos: então dará erro na função
+
+
+
+Inferência literal
+.................................................................................
+function fazerReq(url: string, method: 'GET' | 'POST'){}
+type Methods = 'GET' | 'POST'
+let url = 'https://google.com'
+let method: Methods = 'GET'
+fazerReq(url,method)
+..... funciona normalmente mas se eu fizesse com variavel daria problema pois
+a variavel poderia mudar de valor que não seria get ou post
+let method = 'GET' /// em outro momento a variavel poderia ser method ='xxx'
+fazerReq(url,method)
+posso até está mandando o conteúdo correto mas não do modo correto.
+
+
+
+Type para funções
+.................................................................................
+type MathFunction = (n1: number, n2: number) => number;
+const somar: MathFunction = (n1,n2) =>{
+    return n1+n2;
+}
+
+
+Retorno Void
+.................................................................................
+type QualquerRetorno = () => void;
+const algo: QualquerRetorno = ()=>{
+    return 12;
+}
+let retorno = algo();
+
+    neste caso acima funciona pois o tipo da função não espera retorno algum, tanto faz
+    se há retorno ou não diferente do modelo abaixo:
+
+const minhaFuncao = ():void =>{
+    return 12;
+}
+    
+    neste caso o retorno da função é void então não pode haver retorno e a função da erro
+
+
+
+watchMode no arquivo
+.................................................................................
+tsc src/script.ts --watchMode ou tsc src/script.ts --outDir public -w
+Nesse comando quando a alteração for feita no TS ele recria o JS assim que forem salvos
+
+
+Criando o arquivo tsconfig.json
+.................................................................................
+tsc --init (cria o arquivo tsconfig.json na pasta do projeto)
+
+... agora quando digitar tsc ele gera todos os JS a partir do TS só que na mesma pasta do TS
+... tsc -w também vai gerar arquivos TS em JS assim que salvar
+
+
+arquivos: exclude (arquivos excluidos da lista de compilação de TS para JS)
+arquivos: include (arquivos incluidos da lista de compilação de TS para JS)
+"exclude": [
+    "src/outro.ts"  //  - exclui arquivo outro.ts na pasta src
+    "**/*.dev.ts"      //  - excluir todos arquivos que terminam com a extensão .dev.ts em qualquer pasta
+]
+"include": [
+    "src/outro.ts"  //  - inclui somente este arquivo para compilação
+    "src/*"         //  - somente arquivos da pasta src serão compilados
+]
+
+
+"target": "es6" qual tipo EcmaScript será compilado a partir do es6 que tem let e const por exemplo
+
+outDir: diretório onde serão compilados os JS
+rootDir: diretório onde os TS estão para compilar e jogar no outDir
+
+removeComments : remove os comentários no JS após a compilação do TS
+
+noEmit: não gera os JS (desnecessário em parte, somente se quiser testar alguma coisa)
+
+noEmitOnError   : não gera arquivos JS quando qualquer algum tiver erro no código (não vem na lista tem que incluir manualmente)
+                : importante para que as alterações não quebrem seu sistema.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

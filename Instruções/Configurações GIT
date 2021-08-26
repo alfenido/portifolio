@@ -1,0 +1,129 @@
+GIT
+==================================================================================
+Alterando configurações
+..................................................................................
+git config --global user.name "Helder Monteiro"
+git config --global user.email "monteiro_helder@hotmail.com"
+git config --global core.edit vscode
+
+
+Verificando configurações
+------------------------------------------------------------------
+git config --list (mostra todas a configurações)
+git config core.edit
+git config user.name
+git config user.email
+
+
+iniciando o repositório do GIT
+..................................................................................
+>>> dentro da pasta do repositório digite:
+git init 
+.... aparece a msg abaixo...
+....Initialized empty Git repository in /home/morpheus/modulogit/.git/
+
+
+status do GIT
+..................................................................................
+git status
+
+
+adicionado arquivos ao git
+..................................................................................
+git add nomedoarquio.ext
+git add -A (pega todos os arquivos untracked - nao inclusos no git
+
+
+commit 
+..................................................................................
+git commit -m "Descrição do que foi atualizado"
+
+
+Verificando os commits executados no projeto
+..................................................................................
+git log
+
+saber qual branch está
+.............................................
+git branch
+
+voltar alterações no git (Soft / Mixed / Hard)
+git reset --hard "numero do commit"
+
+
+criando novo branch
+..................................................................................
+git branch NomeBranch
+
+
+mudando de branch
+..................................................................................
+git checkout NomeBranch
+
+
+saber quais alterações foram feitas nos arquivos
+..................................................................................
+git diff (mostra todos as alterações em todos arquivos)
+git diff --name-only (mostra somente o nome dos arquivos modificados)
+
+
+voltar um arquivo específico
+..................................................................................
+git checkout HEAD -- NomeDoArquivo
+
+
+Gerando chave ssh para o github
+..................................................................................
+ssh-keygen -t ed25519 -C "monteiro_helder@hotmail.com"
+
+
+
+Metodos do GitHub (fetch and push)
+fetch -> pegar o conteúdo do github e trazer para o computador
+push  -> pegar o conteúdo do computador e levar para o github (nuvem)
+..................................................................................
+git remote -v
+metodo PUSH: origin é a conta criada no git hub e master é o branch no computador
+git push -u origin master
+
+
+ignorando arquivos para o git( arquivos de senha/coisas que não há necessidade de controle)
+..................................................................................
+crie um arquivo ".gitignore" sem aspas
+e insira todos os arquivos que serão ignorados
+exemplo texto.txt ou *.txt
+se quiser ignorar uma pasta : NomeDaPasta/
+ou se quiser ignorar arquivos de uma pasta: NomeDaPasta/*
+
+
+Revertendo sem perder o código (revert)
+..................................................................................
+git revert --no-edit "Codigo do comit"
+
+
+Deletando Branch - locais e remotos
+..................................................................................
+Remoto:
+    git push origin :NomeDoBranch  (dois pontos significa deletar)
+
+Local:
+    git branch -D NomeDoBranch
+
+
+Importando dados do repositório remoto para local
+..................................................................................
+git pull origin master
+ou
+Merge branch 'NomeDoBranch' of NomeDoRepositorio
+Merge branch 'master' of https://github.com/monteirohelder/helderportifolio
+
+
+contribuindo com outros repositórios
+..................................................................................
+fork (clona o projeto original para seu repositorio) e pull request (envia suas alterações para o repositório origem) 
+
+
+========================================================================
+token - monteiro_helder@hotmail.com
+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
+========================================================================

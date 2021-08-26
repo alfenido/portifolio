@@ -1,9 +1,8 @@
-import express, { Request, Response} from 'express';
+import express from 'express';
+import mainRoutes from './Routes/index';
 
 const server = express();
 
-server.get('/', (req: Request, res: Response) => {
-    res.json('teste');
-})
+server.use(mainRoutes);
 
 server.listen(3000);

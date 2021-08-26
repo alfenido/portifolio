@@ -1,0 +1,136 @@
+Node JS - npm=node package manager
+=================================================================================
+1- npm init -y ===>> (arquivo package.json)
+2- tsc --init ===>> (arquivo tsconfig.json)
+3- sudo npm install --save-dev @types/node ===> (lib node para o ts)
+4- tsc -w ===>> gerar arquivos ts em js
+4.1 - node dist/index.js (executar arquivos js)
+5- npm install -g nodemon ===>> lib para automatizar executar ts
+6- sudo npm install express ===>> criar servidor 
+   sudo npm install @types/express
+=================================================================================
+1- iniciar projeto 
+.................................................................................
+dentro da pasta: npm init (e responda as perguntas)
+ ou npm init -y (ele coloca yes em todas as perguntas)
+
+2- iniciando um arquivo de configuração TypeScript no projeto node
+tsc --init (cria o arquivo tsconfig.json na pasta do projeto)
+
+configure:
+    "target": "es6", 
+    "moduleResolution": "node",
+    "outDir": "./dist",       
+    "rootDir": "./src",    
+
+
+3- Instalando Dependencia no Node
+.................................................................................
+Dependencia que ajuda o TypeScript a entender o node e a opção --save-deve 
+é para executar somente no desenvolvimento, na produção não há necessidade
+na pasta do projeto digite no prompt de comando
+npm install --save-dev @types/node
+    ele cria a pasta node_modules
+
+
+4- inicie o watchMode para a compilação dos arquivos ts em js
+.................................................................................
+tsc -w
+
+
+4.1- Para executar os arquivos node
+.................................................................................
+node dist/index.js
+
+
+criando atalhos dentro do arquivo package.json
+.................................................................................
+dentro do arquivo crie mais um atalho na tag scripts
+"scripts":{
+    "start": "node dist/index.js",
+    "what-ts": "tsc -w",
+    "start-dev": "nodemon src/index.ts" 
+} 
+
+para executar os atalhos digite no prompt de comando
+npm run start (no caso do start, não precisa do run)
+npm run what-ts 
+
+para executar mais de um comando no atalho coloque && ex: "what-ts": "tsc -w && npm run start "
+
+
+entendendo import/export em ES6
+.................................................................................
+export:
+cria as funcões com export
+export function somar(n1: number, n2: number): number{return n1+n2}
+export function subtrair(n1: number, n2: number): number{return n1-n2}
+export function multiplicar(n1: number, n2: number): number{return n1*n2}
+
+import:
+import * as Matematica from './Matematica'
+o uso é Matematica.somar(10,20)
+
+import {somar} from './Matematica'
+o uso é somar(10,20)
+
+
+outra forma
+criar as funções normais e depois dá o export
+
+export default {
+    somar: somar,
+    subtrair,
+    multiplicar,
+    ...
+}
+
+import Matematica from './Matematica'
+o uso é Matematica.somar(10,20)
+
+
+
+importando arquivos de terceiros (npmjs.com/package/validator)
+.................................................................................
+primeiro instale a biblioteca
+    npm install validator
+depois import
+    import valid from 'validator'
+
+tem algumas funções que tem dicas (validator por exemplo ) tem um DT depois do nome da lib
+ai você pode instalar também ao digitar validator. ele dá dicas do que usar
+    npm install --save-dev @types/validator
+
+
+5- lib Nodemon - biblioteca de monitoramento do Node
+.................................................................................
+npm install -g nodemon (-g para instalação global - todos os projeto irão usar)
+
+nodemon dist/index.js (ele executa e fica monitorando se houver alteração ele executa novamente.
+
+
+Usando Nodemon com Typescript
+.................................................................................
+instalar a bliblioteca ts-node
+    sudo npm install -g ts-node
+
+essa biblioteca permite que você execute o arquivo TS
+    ts-node src/index.ts
+antes só estava executando os arquivos js
+você pode agora também executar o comando nodemon 
+    nodemon src/index.ts
+
+neste caso pode colocar criar um atalho no arquivo package.json
+    "start-dev": "nodemon src/index.ts"    
+    npm run start-dev
+
+
+6- Instalando o Express e criando um servidor
+.................................................................................
+sudo npm install express
+
+
+
+
+
+
